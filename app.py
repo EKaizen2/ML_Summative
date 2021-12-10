@@ -44,7 +44,7 @@ def predict_file():
 
     result = ""  
 
-    prediction = model.predict(answer.sum(axis=1))
+    prediction = model.predict(answer.sum(axis=513))
     result = prediction
     st.write(result)
 
