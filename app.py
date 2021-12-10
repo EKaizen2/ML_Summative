@@ -34,8 +34,6 @@ if st.button('Predict'):
 	elif prediction <= 0:
 		print('Nagative')
 	st.header("Please find predicted value below")
-	st.write("The overall predicted score for the above player is", np.round(prediction[0]))
-  	
-	st.write("The overall predicted score for the above player is", clubs.index(club))
+	st.write("Your comment is predicted to be a ", np.round(prediction), " comment")
 else:
-	st.write('Thank You For Trusting Us')
+	st.write("Try again")
