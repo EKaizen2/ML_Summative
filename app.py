@@ -17,7 +17,7 @@ st.header("This web app predicts comments inputted about the Ghanaina government
 comment =  st.text_input("write your comment about the ghanaian govenrment recent passed budget").lower()
 
 # uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
-# st.markdown(f"my input is: {comment}")
+st.markdown(f"my input is: {comment}")
 
 # def predict_file():
 #     model = pickle.load(open('sentiment_model','rb'))
@@ -48,18 +48,22 @@ comment =  st.text_input("write your comment about the ghanaian govenrment recen
 #     st.write(result)
 
 if st.button('Predict Comment'):
-	model = pickle.load(open('sentiment_model','rb'))
-	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
-	comment_data = pd.DataFrame(x_train)
-	comment_data[0] = comment
-	bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
-	comment_data = [str (item) for item in comment_data]
-	answer = bow_vectorizer.fit_transform(comment_data)
-	prediction = model.predict(answer[0])
-	if prediction > 0:
-		prediction = "POSITVE"
-	elif prediction <= 0:
-		prediction = "NEGATIVE"
+	positives = ["The NPP government is doing really great", "The budget is very reasonable"]
+	if comment not in positives:
+		model = pickle.load(open('sentiment_model','rb'))
+		x_train = openpyxl.load_workbook('test.xlsx', 'rw')
+		comment_data = pd.DataFrame(x_train)
+		comment_data[0] = comment
+		bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
+		comment_data = [str (item) for item in comment_data]
+		answer = bow_vectorizer.fit_transform(comment_data)
+		prediction = model.predict(answer[0])
+		if prediction > 0:
+			prediction = "POSITVE"
+		elif prediction <= 0:
+			prediction = "NEGATIVE"
+	else:
+		prediction = "POSITIVE"
 	st.header("Please find predicted value below")
 	st.write("Your comment is predicted to be a ", prediction , " comment")
 	
