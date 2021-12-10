@@ -42,8 +42,8 @@ def predict_file():
     answer = bow_vectorizer.fit_transform(df)
 
     result = ""
-
-    prediction = model.predict(answer.iloc[:,:])
+    M2 = answer[idx[0],:]                                                                                 
+    prediction = model.predict(M2)
     result = prediction
     st.write(result)
 
