@@ -12,14 +12,13 @@ st.title("Sentiment Analysis on the Ghanaian Government")
 st.header("Sentiment Analysis on the Ghanaian Government")
 st.write("This web app predicts comments inputted about the Ghanaina government as to whether it is positive or negative")
 
-model = pickle.load(open('sentiment_model.pkl','rb'))
+model = pickle.load(open('sentiment_model','rb'))
 
 comment =  st.text_input("write your comment about the ghanaian govenrment recent passed budget")
 
 st.markdown(f"my input is: {comment}")
 
 if st.button('Predict'):
-# 	model = pickle.load(open('sentiment_model.pkl', 'rb'))
 	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
 	comment_data = pd.DataFrame(x_train)
 	comment_data[0] = comment
