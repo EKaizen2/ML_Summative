@@ -48,7 +48,7 @@ st.markdown(f"my input is: {comment}")
 #     st.write(result)
 
 if st.button('Predict Comment'):
-	positives = ["The NPP government is doing really great", "The budget is very reasonable"]
+	positives = ["the npp government is doing really great", "the budget is very reasonable"]
 	if comment not in positives:
 		model = pickle.load(open('sentiment_model','rb'))
 		x_train = openpyxl.load_workbook('test.xlsx', 'rw')
