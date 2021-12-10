@@ -43,11 +43,10 @@ def predict_file():
     answer = bow_vectorizer.fit_transform(comment_data)
 
     result = ""
-    
-    if st.button("Predict"):
-      prediction = model.predict(answer)
-      result = prediction
-      st.write(result)
+
+    prediction = model.predict(answer)
+    result = prediction
+    st.write(result)
 
 if st.button('Predict'):
 	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
