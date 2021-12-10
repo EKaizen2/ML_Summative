@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import openpyxl
+import xlrd
 import numpy as np
 from PIL import Image
 from smart_open import smart_open
