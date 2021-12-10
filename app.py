@@ -11,8 +11,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.feature_extraction.text import CountVectorizer
 
 st.title("Sentiment Analysis on the Ghanaian Government")
-st.header("Sentiment Analysis on the Ghanaian Government")
-st.write("This web app predicts comments inputted about the Ghanaina government as to whether it is positive or negative")
+st.header("This web app predicts comments inputted about the Ghanaina government as to whether it is positive or negative")
 
 model = pickle.load(open('sentiment_model','rb'))
 
@@ -44,7 +43,7 @@ def predict_file():
 
     result = ""
 
-    prediction = model.predict(answer)
+    prediction = model.predict(answer.iloc[:,:])
     result = prediction
     st.write(result)
 
