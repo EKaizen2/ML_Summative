@@ -43,8 +43,9 @@ def predict_file():
     answer = bow_vectorizer.fit_transform(df)
 
     result = ""  
+    alist = [np.sum(row.toarray()[0]) for row in answer]
 
-    prediction = model.predict(answer.sum(axis=-1))
+    prediction = model.predict(alist)
     result = prediction
     st.write(result)
 
