@@ -48,22 +48,18 @@ st.markdown(f"my input is: {comment}")
 #     st.write(result)
 
 if st.button('Predict Comment'):
-	positives = ["the npp government is doing really great", "the budget is very reasonable"]
-	if comment not in positives:
-		model = pickle.load(open('sentiment_model','rb'))
-		x_train = openpyxl.load_workbook('test.xlsx', 'rw')
-		comment_data = pd.DataFrame(x_train)
-		comment_data[0] = comment
-		bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
-		comment_data = [str (item) for item in comment_data]
-		answer = bow_vectorizer.fit_transform(comment_data)
-		prediction = model.predict(answer[0])
-		if prediction > 0:
-			prediction = "POSITVE"
-		elif prediction <= 0:
-			prediction = "NEGATIVE"
-	else:
-		prediction = "POSITIVE"
+	model = pickle.load(open('sentiment_model','rb'))
+	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
+	comment_data = pd.DataFrame(x_train)
+	comment_data[0] = comment
+	bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
+	comment_data = [str (item) for item in comment_data]
+	answer = bow_vectorizer.fit_transform(comment_data)
+	prediction = model.predict(answer[0])
+	if prediction > 0:
+		prediction = "POSITVE"
+	elif prediction <= 0:
+		prediction = "NEGATIVE"
 	st.header("Please find predicted value below")
 	st.write("Your comment is predicted to be a ", prediction , " comment")
 	
