@@ -42,13 +42,9 @@ def predict_file():
     #comment_data = [str (item) for items in dataframe]
     answer = bow_vectorizer.fit_transform(df)
 
-    result = ""
+    result = ""  
 
-    #M.sum(axis=1)
-	
-    M2 = answer[idx[0],:]   
-
-    prediction = model.predict(M2)
+    prediction = model.predict(answer.sum(axis=1))
     result = prediction
     st.write(result)
 
