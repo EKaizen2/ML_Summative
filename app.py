@@ -19,6 +19,7 @@ comment =  st.text_input("write your comment about the ghanaian govenrment recen
 st.markdown(f"my input is: {comment}")
 
 if st.button('Predict'):
+	pass
 # 	model = pickle.load(open('sentiment_model.pkl', 'rb'))
 # 	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
 # 	comment_data = pd.DataFrame(x_train)
