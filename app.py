@@ -44,6 +44,7 @@ def predict_file():
 
     result = ""  
     alist = [np.sum(row.toarray()[0]) for row in answer]
+    alist.reshape(-1, 1)
 
     prediction = model.predict(alist)
     result = prediction
