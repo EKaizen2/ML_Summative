@@ -25,7 +25,7 @@ if st.button('Predict'):
 	comment_data = pd.DataFrame(x_train)
 	comment_data[0] = comment
 	bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
-	answer = bow_vectorizer.fit_transform(comment_data)
+	answer = bow_vectorizer.fit_transform(comment_data, lowercase=False)
 	prediction = model.predict(answer[0])
 	if prediction.predict(answer[0]) > 0:
 		print('Positive')
