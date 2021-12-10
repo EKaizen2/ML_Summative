@@ -20,12 +20,40 @@ comment =  st.text_input("write your comment about the ghanaian govenrment recen
 
 st.markdown(f"my input is: {comment}")
 
+def predict_file:
+    # front end elements of the web page
+    html_temp = """ 
+    <div style ="background-color:#FF0000;padding:10px;font-weight:10px"> 
+    <h1 style ="color:white;>Ephraim Adongo Sport Prediction</h1> 
+    </div> 
+    """
+
+    # display the front end aspect
+    st.markdown(html_temp, unsafe_allow_html=True)
+    default_value_goes_here = ""
+    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
+
+    global dataframe
+    if uploaded_file:
+        df = pd.read_excel(uploaded_file)
+        dataframe = df
+    
+    bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
+    comment_data = [str (item) for item in dataframe]
+    answer = bow_vectorizer.fit_transform(comment_data)
+
+    result = ""
+    
+    if st.button("Predict"):
+      prediction = model.predict(answer)
+      result = prediction
+      st.write(result)
+
 if st.button('Predict'):
 	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
 	comment_data = pd.DataFrame(x_train)
 	comment_data[0] = comment
 	bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
-# 	comment_data = [item for item in comment_data if not isinstance(item, int)]
 	comment_data = [str (item) for item in comment_data]
 	answer = bow_vectorizer.fit_transform(comment_data)
 	prediction = model.predict(answer[0])
@@ -35,5 +63,8 @@ if st.button('Predict'):
 		prediction = "NEGATIVE"
 	st.header("Please find predicted value below")
 	st.write("Your comment is predicted to be a ", prediction , " comment")
+	
+elif st.button('Upload data'):
+	predict_file()
 else:
 	st.write("Try again")
