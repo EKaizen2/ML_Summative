@@ -30,10 +30,10 @@ if st.button('Predict'):
 	answer = bow_vectorizer.fit_transform(comment_data)
 	prediction = model.predict(answer[0])
 	if prediction > 0:
-		print('Positive')
+		prediction = "positive"
 	elif prediction <= 0:
-		print('Nagative')
+		prediction = "negetive"
 	st.header("Please find predicted value below")
-	st.write("Your comment is predicted to be a ", np.round(prediction), " comment")
+	st.write("Your comment is predicted to be a ", prediction , " comment")
 else:
 	st.write("Try again")
