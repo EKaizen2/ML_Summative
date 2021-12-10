@@ -36,11 +36,11 @@ def predict_file():
     global dataframe
     if uploaded_file:
         df = pd.read_excel(uploaded_file)
-        dataframe = df
+        #dataframe = df
     
     bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
-    comment_data = [str (item) for items in dataframe]
-    answer = bow_vectorizer.fit_transform(comment_data)
+    #comment_data = [str (item) for items in dataframe]
+    answer = bow_vectorizer.fit_transform(df)
 
     result = ""
 
