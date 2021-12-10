@@ -9,6 +9,7 @@ from smart_open import smart_open
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.feature_extraction.text import CountVectorizer
+from scipy.sparse import csr_matrix
 
 st.title("Sentiment Analysis on the Ghanaian Government")
 st.header("This web app predicts comments inputted about the Ghanaina government as to whether it is positive or negative")
@@ -42,7 +43,11 @@ def predict_file():
     answer = bow_vectorizer.fit_transform(df)
 
     result = ""
-    M2 = answer[idx[0],:]                                                                                 
+
+    #M.sum(axis=1)
+	
+    M2 = answer[idx[0],:]   
+
     prediction = model.predict(M2)
     result = prediction
     st.write(result)
