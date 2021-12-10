@@ -39,7 +39,7 @@ def predict_file():
         dataframe = df
     
     bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
-    comment_data = [str (item) for item in dataframe]
+    comment_data = [str (item) for items in dataframe]
     answer = bow_vectorizer.fit_transform(comment_data)
 
     result = ""
