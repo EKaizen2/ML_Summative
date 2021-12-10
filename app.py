@@ -29,9 +29,9 @@ if st.button('Predict'):
 	comment_data = [str (item) for item in comment_data]
 	answer = bow_vectorizer.fit_transform(comment_data)
 	prediction = model.predict(answer[0])
-	if prediction.predict(answer[0]) > 0:
+	if prediction > 0:
 		print('Positive')
-	elif prediction.predict(answer[0]) <= 0:
+	elif prediction <= 0:
 		print('Nagative')
 	st.header("Please find predicted value below")
 	st.write("The overall predicted score for the above player is", np.round(prediction[0]))
