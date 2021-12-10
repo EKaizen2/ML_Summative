@@ -37,7 +37,7 @@ def predict_file():
         df = pd.read_excel(uploaded_file)
         dataframe = df
     
-    bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
+    bow_vectorizer = CountVectorizer(max_df=9000, min_df=513, max_features=513, stop_words='english')
     #comment_data = [str (item) for items in dataframe]
     answer = bow_vectorizer.fit_transform(dataframe)
 
