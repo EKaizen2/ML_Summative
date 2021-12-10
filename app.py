@@ -20,7 +20,7 @@ comment =  st.text_input("write your comment about the ghanaian govenrment recen
 
 st.markdown(f"my input is: {comment}")
 
-def predict_file:
+def predict_file():
     # front end elements of the web page
     html_temp = """ 
     <div style ="background-color:#FF0000;padding:10px;font-weight:10px"> 
