@@ -18,6 +18,7 @@ model = pickle.load(open('sentiment_model','rb'))
 
 comment =  st.text_input("write your comment about the ghanaian govenrment recent passed budget").lower()
 
+uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
 st.markdown(f"my input is: {comment}")
 
 def predict_file():
@@ -31,7 +32,6 @@ def predict_file():
     # display the front end aspect
     st.markdown(html_temp, unsafe_allow_html=True)
     default_value_goes_here = ""
-    uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
 
     global dataframe
     if uploaded_file:
