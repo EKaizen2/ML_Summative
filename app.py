@@ -14,14 +14,13 @@ from scipy.sparse import csr_matrix
 st.title("Sentiment Analysis on the Ghanaian Government")
 st.header("This web app predicts comments inputted about the Ghanaina government as to whether it is positive or negative")
 
-model = pickle.load(open('sentiment_model','rb'))
-
 comment =  st.text_input("write your comment about the ghanaian govenrment recent passed budget").lower()
 
 uploaded_file = st.file_uploader("Choose a XLSX file", type="xlsx")
 st.markdown(f"my input is: {comment}")
 
 def predict_file():
+    model = pickle.load(open('sentiment_model','rb'))
     # front end elements of the web page
     html_temp = """ 
     <div style ="background-color:#FF0000;padding:10px;font-weight:10px"> 
@@ -36,21 +35,20 @@ def predict_file():
     global dataframe
     if uploaded_file:
         df = pd.read_excel(uploaded_file)
-        #dataframe = df
+        dataframe = df
     
     bow_vectorizer = CountVectorizer(max_df=9000, min_df=1, max_features=513, stop_words='english')
     #comment_data = [str (item) for items in dataframe]
-    answer = bow_vectorizer.fit_transform(df)
+    answer = bow_vectorizer.fit_transform(dataframe)
 
     result = ""  
-    alist = [np.sum(row.toarray()[0]) for row in answer]
-    np.matrix.reshape(-1, 1)
 
-    prediction = model.predict(alist)
-    result = prediction
+    pred = model.predict(answer)
+    result = pred
     st.write(result)
 
-if st.button('Predict'):
+if st.button('Predict Comment'):
+	model = pickle.load(open('sentiment_model','rb'))
 	x_train = openpyxl.load_workbook('test.xlsx', 'rw')
 	comment_data = pd.DataFrame(x_train)
 	comment_data[0] = comment
@@ -65,7 +63,7 @@ if st.button('Predict'):
 	st.header("Please find predicted value below")
 	st.write("Your comment is predicted to be a ", prediction , " comment")
 	
-elif st.button('Upload data'):
+elif st.button('Predict uploaded data'):
 	predict_file()
 else:
 	st.write("Try again")
